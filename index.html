@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <title>Ajax</title>
+</head>
+<body>
+  <script>
+
+    var ajax;
+    if (typeof XMLHttpRequest == "undefined") {
+      ajax = new ActiveXObject('Microsoft.XMLHTTP')
+    } else {
+      ajax = new XMLHttpRequest();
+    }
+  function pobierz()
+  {
+    ajax.open("GET", "./text.txt", "true");
+    ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+    ajax.onreadystatechange = function()
+    {
+        if (ajax.readyState == 4 && ajax.status == 200) {
+          alert(ajax.responseText);
+        } else {
+          alert('Czekaj: Stan' + ajax.readyState + 'Status:' + ajax.status);
+        }
+    }
+    ajax.send();
+  }
+  </script>
+  <p>Kliknij przycisk aby porać dane z serwera</p>
+<input type="button" value="Pobierz dane z serwera" onclick="pobierz();"/>
+</body>
+</html>
